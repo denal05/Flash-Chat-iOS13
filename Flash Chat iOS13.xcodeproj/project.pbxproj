@@ -19,6 +19,7 @@
 		0B62819E235F0F4D00E35CAF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0B62819D235F0F4D00E35CAF /* README.md */; };
 		0E2D0E942544CD78000344E4 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E2D0E932544CD78000344E4 /* Message.swift */; };
 		0E2D0E9B2544D948000344E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E2D0E9A2544D947000344E4 /* GoogleService-Info.plist */; };
+		0E752A7C25647D6800273651 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E752A7B25647D6800273651 /* Helper.swift */; };
 		0E7E23CD25647618007B2093 /* Index.html in Resources */ = {isa = PBXBuildFile; fileRef = 0E7E23CB256475AA007B2093 /* Index.html */; };
 		0E83B69E2548A03D00DCCC5E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E83B69D2548A03D00DCCC5E /* WebViewController.swift */; };
 		0E83B6A12548A5CE00DCCC5E /* Talk.js in Resources */ = {isa = PBXBuildFile; fileRef = 0E83B6A02548A5CE00DCCC5E /* Talk.js */; };
@@ -44,6 +45,7 @@
 		0B62819D235F0F4D00E35CAF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		0E2D0E932544CD78000344E4 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		0E2D0E9A2544D947000344E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0E752A7B25647D6800273651 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		0E7E23CB256475AA007B2093 /* Index.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Index.html; path = "/Users/denis.aleksandrov/projects/github.com/denal05/Flash-Chat-iOS13/Flash Chat iOS13/Index.html"; sourceTree = "<absolute>"; };
 		0E83B69D2548A03D00DCCC5E /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		0E83B6A02548A5CE00DCCC5E /* Talk.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Talk.js; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				0B628192235DF02000E35CAF /* Controllers */,
 				0B62817F235DEE8400E35CAF /* Assets.xcassets */,
 				0E83B6A32548A5DF00DCCC5E /* JavaScript */,
+				0E752A7A25647D6800273651 /* Helper */,
 				0B628181235DEE8400E35CAF /* LaunchScreen.storyboard */,
 				0B628184235DEE8400E35CAF /* Info.plist */,
 				0E2D0E9A2544D947000344E4 /* GoogleService-Info.plist */,
@@ -134,6 +137,14 @@
 				0E2D0E932544CD78000344E4 /* Message.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		0E752A7A25647D6800273651 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				0E752A7B25647D6800273651 /* Helper.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		0E83B6A32548A5DF00DCCC5E /* JavaScript */ = {
@@ -287,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E752A7C25647D6800273651 /* Helper.swift in Sources */,
 				0B62818B235DF00000E35CAF /* WelcomeViewController.swift in Sources */,
 				0B628177235DEE8100E35CAF /* AppDelegate.swift in Sources */,
 				0B628179235DEE8100E35CAF /* SceneDelegate.swift in Sources */,
