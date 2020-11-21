@@ -24,32 +24,12 @@ Flash Chat is an internet based messaging app similar to WhatsApp, the popular m
 * Learn about the App Lifecycle and how to use viewWillAppear or viewWillDisappear.
 * How to create direct Segues for navigation.
 
-
-# Constants
-```
-struct K {
-    static let cellIdentifier = "ReusableCell"
-    static let cellNibName = "MessageCell"
-    static let registerSegue = "RegisterToChat"
-    static let loginSegue = "LoginToChat"
-    
-    struct BrandColors {
-        static let purple = "BrandPurple"
-        static let lightPurple = "BrandLightPurple"
-        static let blue = "BrandBlue"
-        static let lighBlue = "BrandLightBlue"
-    }
-    
-    struct FStore {
-        static let collectionName = "messages"
-        static let senderField = "sender"
-        static let bodyField = "body"
-        static let dateField = "date"
-    }
-}
-
-```
-
 >This is a companion project to The App Brewery's Complete App Developement Bootcamp, check out the full course at [www.appbrewery.co](https://www.appbrewery.co/)
 
 ![End Banner](Documentation/readme-end-banner.png)
+
+## Denis' Notes
+
+* Added email and password validation; also added error messages, displayed via an alert pop-up. 
+* Changed the authentication workflow: starting with a single email field first checking whether such an email address has already been registered with FirebaseAuth. If it's been already registered, segueing to the LoginViewController and passing the email address. If it hasn't been already registered, segueing to the RegisterViewController and passing the email address.
+* Persisting a custom session with user email in UserDefaults: added a profileInfo Dictionary with an email key, saving it in UserDefaults. Checking with FirebaseAuth whether Auth.auth().currentUser != nil i.e. whether a user is already logged-in, and segueing to the ChatViewController if so. If the user email saved in UserDefaults is different from the currently logged-in user, saving the currently logged-in user's email address in UserDefaults. Upon calling Auth.auth().createUser(withEmail:password:) or Auth.auth().signIn(withEmail:password:) also saving the currently logged-in user's email address in UserDefaults.
