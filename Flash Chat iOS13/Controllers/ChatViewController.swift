@@ -21,12 +21,11 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("ChatViewController::" + #function + ": -------------------------------------------------------------------------------")
         title = K.appName
         tableView.dataSource = self
         navigationItem.hidesBackButton = true
-        
         tableView.register(UINib(nibName: K.cellNibName, bundle: nil), forCellReuseIdentifier: K.cellIdentifier)
-        
         reloadMessages()
     }
     

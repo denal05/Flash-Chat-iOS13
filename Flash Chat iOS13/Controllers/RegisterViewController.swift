@@ -11,13 +11,43 @@ import UIKit
 import Firebase
 
 class RegisterViewController: UIViewController {
-
+    let defaults = UserDefaults.standard
+    var profileInfo: Dictionary = [
+        "Email":  "--placeholder@email.com--"
+    ]
+    
     var email: String = ""
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("RegisterViewController::" + #function + ": -------------------------------------------------------------------------------")
+        
+        if let safeProfileInfo = defaults.dictionary(forKey: "profileInfo") as? Dictionary<String, String> {
+            print("RegisterViewController::" + #function + ": defaults.dictionary(forKey: \"profileInfo\") =  \(safeProfileInfo["Email"])")
+            profileInfo = safeProfileInfo
+        }
+        
+        print("RegisterViewController::" + #function + ": profileInfo[\"Email\"] = \(self.profileInfo["Email"])")
+        
+        var handle = Auth.auth().addStateDidChangeListener { (fibAuth, fibUser) in
+            if Auth.auth().currentUser != nil {
+                // User is signed in.
+                if let user = Auth.auth().currentUser {
+                    print("RegisterViewController::" + #function + ": Auth.auth().currentUser: " +
+                            "\n | user.uid:   \(user.uid)" +
+                            "\n | user.email: \(user.email ?? "NO_USER_EMAIL")")
+                    if self.profileInfo["Email"] != user.email {
+                        self.profileInfo["Email"] = user.email
+                        self.defaults.setValue(self.profileInfo, forKey: "profileInfo")
+                    }
+                    // performSegue...
+                }
+            } else {
+                print("RegisterViewController::" + #function + ": Auth.auth().currentUser is nil | No user is signed in.")
+            }
+        }
         
         if self.email != "" {
             emailTextField.text = self.email
@@ -50,9 +80,9 @@ class RegisterViewController: UIViewController {
                     self.present(alert, animated: true)
                     return
                 } else {
-                    ///@TODO self.profileInfo["Email"] = email
-                    ///@TODO self.defaults.setValue(self.profileInfo, forKey: "profileInfo")
-                    self.performSegue(withIdentifier: K.registerSegue, sender: self)
+                    self.profileInfo["Email"] = email
+                    self.defaults.setValue(self.profileInfo, forKey: "profileInfo")
+                    self.performSegue(withIdentifier: K.registerToChatSegue, sender: self)
                 }
             }
         }

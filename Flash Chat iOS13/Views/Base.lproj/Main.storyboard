@@ -111,6 +111,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="8no-Vt-nI4" id="LRH-EE-6m7"/>
                         <outlet property="titleLabel" destination="y7D-jv-BlJ" id="7U9-Ah-qfi"/>
+                        <segue destination="lwd-AH-u8E" kind="show" identifier="WelcomeToChat" id="8y5-G1-nM4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X0w-oB-wTX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

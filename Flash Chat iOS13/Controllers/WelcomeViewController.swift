@@ -12,6 +12,10 @@ import FirebaseAuth
 import CLTypingLabel
 
 class WelcomeViewController: UIViewController {
+    let defaults = UserDefaults.standard
+    var profileInfo: Dictionary = [
+        "Email":  "--placeholder@email.com--"
+    ]
     
     @IBOutlet weak var titleLabel: CLTypingLabel!
     @IBOutlet weak var emailTextField: UITextField!
@@ -28,18 +32,51 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("WelcomeViewController::" + #function + ": -------------------------------------------------------------------------------")
+        
+        /*
+        // Manual Title Animation:
+        titleLabel.text = ""
+        var characterIndex = 0.0
+        let titleText = "⚡️FlashChat"
+        for letter in titleText {
+            print("\(#function):  titleText[\(characterIndex)]=\(letter) 0.1 x characterIndex=\(0.1 * characterIndex)")
+            Timer.scheduledTimer(withTimeInterval: 0.1 * characterIndex, repeats: false) { (timer) in
+                self.titleLabel.text?.append(letter)
+            }
+            characterIndex += 1
+        }
+        */
+        
         titleLabel.text = K.appName
         
-//        titleLabel.text = ""
-//        var characterIndex = 0.0
-//        let titleText = "⚡️FlashChat"
-//        for letter in titleText {
-//            print("\(#function):  titleText[\(characterIndex)]=\(letter) 0.1 x characterIndex=\(0.1 * characterIndex)")
-//            Timer.scheduledTimer(withTimeInterval: 0.1 * characterIndex, repeats: false) { (timer) in
-//                self.titleLabel.text?.append(letter)
-//            }
-//            characterIndex += 1
-//        }
+        if let safeProfileInfo = defaults.dictionary(forKey: "profileInfo") as? Dictionary<String, String> {
+            print("WelcomeViewController::" + #function + ": defaults.dictionary(forKey: \"profileInfo\") =  \(safeProfileInfo["Email"])")
+            profileInfo = safeProfileInfo
+        }
+        
+        print("WelcomeViewController::" + #function + ": profileInfo[\"Email\"] = \(self.profileInfo["Email"])")
+        
+        var handle = Auth.auth().addStateDidChangeListener { (fibAuth, fibUser) in
+            if Auth.auth().currentUser != nil {
+                // User is signed in.
+                if let user = Auth.auth().currentUser {
+                    print("WelcomeViewController::" + #function + ": Auth.auth().currentUser: " +
+                            "\n | user.uid:   \(user.uid)" +
+                            "\n | user.email: \(user.email ?? "NO_USER_EMAIL")")
+                    if self.profileInfo["Email"] != user.email {
+                        print("WelcomeViewController::" + #function + ": >>>> self.profileInfo[\"Email\"] != user.email")
+                        self.profileInfo["Email"] = user.email
+                        print("WelcomeViewController::" + #function + ": >>>> Setting self.profileInfo[\"Email\"] = user.email")
+                        self.defaults.setValue(self.profileInfo, forKey: "profileInfo")
+                        print("WelcomeViewController::" + #function + ": >>>> self.defaults.setValue(self.profileInfo, forKey: \"profileInfo\")")
+                    }
+                    self.performSegue(withIdentifier: K.welcomeToChatSegue, sender: self)
+                }
+            } else {
+                print("WelcomeViewController::" + #function + ": Auth.auth().currentUser is nil | No user is signed in.")
+            }
+        }
     }
     
     @IBAction func nextButtonPressed(_ sender: UIBarButtonItem) {
